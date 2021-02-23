@@ -191,6 +191,24 @@ module.exports = function(videojs) {
          if (!this.controlBar) {
             return;
          }
+
+         window['__onGCastApiAvailable'] = (isAvailable) => {
+            if (isAvailable) {
+               enableChromecast(this, pluginOptions);
+            }
+         }
+
+         [
+            '//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1',
+            '//www.gstatic.com/cast/sdk/libs/devtools/debug_layer/caf_receiver_logger.js',
+         ].forEach(url => {
+            const script = document.createElement('script');
+            script.src = url;
+            
+            document.body.appendChild(script);           
+         })
+
+         return
          if (ChromecastSessionManager.isChromecastAPIAvailable()) {
             enableChromecast(this, pluginOptions);
          } else {

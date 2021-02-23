@@ -32,5 +32,15 @@ module.exports = function(videojs, userOpts) {
    videojs = videojs || window.videojs;
    createChromecastButton(videojs);
    createChromecastTech(videojs);
-   enableChromecast(videojs);
+   enableChromecast(videojs, {
+   });
+
+   videojs('video_2', {
+      controls: true,
+      fluid: true,
+      techOrder: [ 'chromecast', 'html5' ],
+      plugins: { chromecast: {
+         receiverAppID: '3AD7C302',
+      } }
+   });
 };

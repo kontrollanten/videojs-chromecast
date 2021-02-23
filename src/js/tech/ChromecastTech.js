@@ -731,10 +731,27 @@ module.exports = function(videojs) {
 
    ChromecastTechImpl = videojs.extend(Tech, ChromecastTech);
 
+   ChromecastTechImpl.canPlayType = () => {
+      console.log('canPlayType')
+
+      return true
+   }
+
    // Required for Video.js Tech implementations.
    // TODO Consider a more comprehensive check based on mimetype.
-   ChromecastTechImpl.canPlaySource = ChromecastSessionManager.isChromecastConnected.bind(ChromecastSessionManager);
-   ChromecastTechImpl.isSupported = ChromecastSessionManager.isChromecastConnected.bind(ChromecastSessionManager);
+   ChromecastTechImpl.canPlaySource = (...args) => {
+      const canPlaySource = ChromecastSessionManager.isChromecastConnected.bind(ChromecastSessionManager)(...args);
+      console.log({canPlaySource})
+
+      return canPlaySource
+   };
+
+   ChromecastTechImpl.isSupported = () => {
+      const isSupported = ChromecastSessionManager.isChromecastConnected.bind(ChromecastSessionManager)();
+      console.log({isSupported})
+
+      return isSupported
+   }
 
    ChromecastTechImpl.prototype.featuresVolumeControl = true;
    ChromecastTechImpl.prototype.featuresPlaybackRate = false;
