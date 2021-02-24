@@ -192,7 +192,7 @@ module.exports = function(videojs) {
             return;
          }
 
-         window['__onGCastApiAvailable'] = (isAvailable) => {
+         window['__onGCastApiAvailable'] = function (isAvailable) {
             if (isAvailable) {
                enableChromecast(this, pluginOptions);
             }
@@ -200,9 +200,9 @@ module.exports = function(videojs) {
 
          [
             '//www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1',
-            '//www.gstatic.com/cast/sdk/libs/devtools/debug_layer/caf_receiver_logger.js',
-         ].forEach(url => {
-            const script = document.createElement('script');
+            '//www.gstatic.com/cast/sdk/libs/devtools/debug_layer/caf_receiver_logger.js'
+         ].forEach(function (url) {
+            var script = document.createElement('script');
             script.src = url;
             
             document.body.appendChild(script);           
