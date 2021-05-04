@@ -224,6 +224,10 @@ ChromecastTech = {
       this._remotePlayerController.seek();
       this._triggerTimeUpdateEvent();
    },
+   
+   seeking: function() {
+      return false;
+   },
 
    /**
     * Returns the current playback time position.
