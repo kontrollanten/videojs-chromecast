@@ -55,6 +55,7 @@ ChromecastTech = {
       this._requestTitle = options.requestTitleFn || _.noop;
       this._requestSubtitle = options.requestSubtitleFn || _.noop;
       this._requestCustomData = options.requestCustomDataFn || _.noop;
+      this._modifyLoadRequestFn = options.modifyLoadRequestFn;
       // See `currentTime` function
       this._initialStartTime = options.startTime || 0;
 
@@ -181,6 +182,7 @@ ChromecastTech = {
       request = new chrome.cast.media.LoadRequest(mediaInfo);
       request.autoplay = true;
       request.currentTime = startTime;
+      if (this._modifyLoadRequestFn) request = this._modifyLoadRequestFn(request);
 
       this._isMediaLoading = true;
       this._hasPlayedCurrentItem = false;
