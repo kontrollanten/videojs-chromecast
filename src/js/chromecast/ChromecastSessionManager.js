@@ -1,5 +1,3 @@
-var _ = require('underscore');
-
 /** @lends ChromecastSessionManager.prototype **/
 class ChromecastSessionManager {
 
